@@ -6,12 +6,18 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
-public class Cog extends JComponent {
+import javafx.scene.paint.Color;
+
+public class CogMKII extends JComponent {
     Point middle;
     double theta = 0;
 
-    public Cog(int w, int h) {
+    public CogMKII(int w, int h) {
         super();
+        middle = new Point(w/2, h/2);
+    }
+
+    public void updateCenter(int w, int h) {
         middle = new Point(w/2, h/2);
     }
 
@@ -21,14 +27,12 @@ public class Cog extends JComponent {
 
         graphics.setStroke(new BasicStroke(2));
 
-        double outer_radius = 200;
-        double inner_radius = outer_radius/2;
+        double outer_radius = 100;
+        double inner_radius = outer_radius/2.5;
 
-        int teeth_count = 10;
+        int teeth_count = 8;
         double teeth_len = 30;
         double teet_width = 30;
-
-
 
         double dTheta = (2 * Math.PI / teeth_count);
         double angle_center = theta;
@@ -52,38 +56,45 @@ public class Cog extends JComponent {
             t.x[0] = (int)(middle.getX() + vx1);
             t.y[0] = (int)(middle.getY() + vy1);
 
-            t.x[1] = t.x[0] + (int)(teeth_len * Math.cos(x1a));
-            t.y[1] = t.y[0] + (int)(teeth_len * Math.sin(x1a));
-
+            t.x[1] = (int)(t.x[0] + Math.cos(angle_center) * teeth_len);
+            t.y[1] = (int)(t.y[0] + Math.sin(angle_center) * teeth_len);
+            
             t.x[3] = (int)(middle.getX() + vx2);
             t.y[3] = (int)(middle.getY() + vy2);
 
-            t.x[2] = t.x[3] + (int)(teeth_len * Math.cos(x2a));
-            t.y[2] = t.y[3] + (int)(teeth_len * Math.sin(x2a));
+            t.x[2] = (int)(t.x[3] + Math.cos(angle_center) * teeth_len);
+            t.y[2] = (int)(t.y[3] + Math.sin(angle_center) * teeth_len);
+
+            
 
             angle_center +=  dTheta;
             
             list.add(t);
         }
 
-        graphics.drawOval(
+        graphics.setColor(java.awt.Color.gray);
+
+        graphics.fillOval(
             (int)(middle.getX() - outer_radius),
             (int)(middle.getY() - outer_radius),
             (int)(outer_radius*2), (int)(outer_radius*2)
         );
 
-        graphics.drawOval(
+        graphics.setColor(java.awt.Color.white);
+        graphics.fillOval(
             (int)(middle.getX() - inner_radius),
             (int)(middle.getY() - inner_radius),
             (int)(inner_radius*2), (int)(inner_radius*2)
         );
 
         for (CogTeeth t : list) {
-            graphics.drawOval(t.x[0], t.y[0], 4, 4);
-            graphics.drawOval(t.x[3], t.y[3], 4, 4);
-            graphics.drawPolyline(t.x, t.y, 4);
-            graphics.drawLine((int)middle.getX(), (int)middle.getY(), t.x[0], t.y[0]);
-            graphics.drawLine((int)middle.getX(), (int)middle.getY(), t.x[3], t.y[3]);
+            graphics.setColor(java.awt.Color.gray);
+            // graphics.drawOval(t.x[0], t.y[0], 4, 4);
+            // graphics.drawOval(t.x[3], t.y[3], 4, 4);
+            graphics.fillPolygon(t.x, t.y, 4);
+            // graphics.setColor(java.awt.Color.gray);
+            // graphics.drawLine((int)middle.getX(), (int)middle.getY(), t.x[0], t.y[0]);
+            // graphics.drawLine((int)middle.getX(), (int)middle.getY(), t.x[3], t.y[3]);
         }
 
         theta += 0.0005;

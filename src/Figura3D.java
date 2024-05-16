@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
-public class Cog extends JComponent {
+public class Figura3D extends JComponent {
     Point middle;
     double theta = 0;
 
-    public Cog(int w, int h) {
+    public Figura3D(int w, int h) {
         super();
         middle = new Point(w/2, h/2);
     }
@@ -82,8 +82,6 @@ public class Cog extends JComponent {
             graphics.drawOval(t.x[0], t.y[0], 4, 4);
             graphics.drawOval(t.x[3], t.y[3], 4, 4);
             graphics.drawPolyline(t.x, t.y, 4);
-            graphics.drawLine((int)middle.getX(), (int)middle.getY(), t.x[0], t.y[0]);
-            graphics.drawLine((int)middle.getX(), (int)middle.getY(), t.x[3], t.y[3]);
         }
 
         theta += 0.0005;

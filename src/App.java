@@ -1,6 +1,5 @@
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
-import javax.swing.plaf.BorderUIResource;
 
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
@@ -20,11 +19,15 @@ public class App {
             // Star star = new Star();
             // Hexagon hex = new Hexagon();
             // StarPolygon sp = new StarPolygon(600, 600);
-            Cog cog = new Cog(600, 600);
+            // Cog cog = new Cog(600, 600);
+            // CogMKII cog = new CogMKII(600, 600);
+            Heart heart = new Heart();
+            // Coisa cog = new Coisa(600, 600);
             // frame.add(hex, BorderLayout.CENTER);
             // frame.add(star, BorderLayout.CENTER);
             // frame.add(sp, BorderLayout.CENTER);
-            frame.add(cog, BorderLayout.CENTER);
+            frame.add(heart, BorderLayout.CENTER);
+            // frame.add(cog, BorderLayout.CENTER);
 
             frame.setVisible(true);
 
@@ -38,7 +41,9 @@ public class App {
                         // star.repaint();
                         // sp.updateCenter(frame.getWidth(), frame.getHeight());
                         // sp.repaint();
-                        cog.repaint();
+                        // cog.updateCenter(frame.getWidth(), frame.getHeight());
+                        // cog.repaint();
+                        heart.repaint();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
