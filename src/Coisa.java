@@ -19,12 +19,12 @@ public class Coisa extends JComponent {
     protected void paintComponent(Graphics g) {
         Graphics2D graphics = (Graphics2D)g;
 
-        graphics.setStroke(new BasicStroke(2));
+        graphics.setStroke(new BasicStroke(1));
 
         double outer_radius = 200;
         double inner_radius = outer_radius/2;
 
-        int teeth_count = 40;
+        int teeth_count = 400;
         double teeth_len = 45;
 
 
@@ -48,13 +48,13 @@ public class Coisa extends JComponent {
             t.x[0] = (int)(middle.getX() + vx1);
             t.y[0] = (int)(middle.getY() + vy1);
 
-            t.x[1] = t.x[0] + (int)(teeth_len * Math.sin(a1));
+            t.x[1] = t.x[0] + (int)(teeth_len * Math.sin(a1) * 2);
             t.y[1] = t.y[0] + (int)(teeth_len * Math.cos(a1));
 
             t.x[3] = (int)(middle.getX() + vx2);
             t.y[3] = (int)(middle.getY() + vy2);
 
-            t.x[2] = t.x[3] + (int)(teeth_len * -Math.sin(a2));
+            t.x[2] = t.x[3] + (int)(teeth_len * -Math.sin(a2)*Math.cos(a1));
             t.y[2] = t.y[3] + (int)(teeth_len * -Math.cos(a2));
 
             angle_center +=  dTheta;
@@ -62,23 +62,23 @@ public class Coisa extends JComponent {
             list.add(t);
         }
 
-        graphics.drawOval(
-            (int)(middle.getX() - outer_radius),
-            (int)(middle.getY() - outer_radius),
-            (int)(outer_radius*2), (int)(outer_radius*2)
-        );
+        // graphics.drawOval(
+        //     (int)(middle.getX() - outer_radius),
+        //     (int)(middle.getY() - outer_radius),
+        //     (int)(outer_radius*2), (int)(outer_radius*2)
+        // );
 
-        graphics.drawOval(
-            (int)(middle.getX() - inner_radius),
-            (int)(middle.getY() - inner_radius),
-            (int)(inner_radius*2), (int)(inner_radius*2)
-        );
+        // graphics.drawOval(
+        //     (int)(middle.getX() - inner_radius),
+        //     (int)(middle.getY() - inner_radius),
+        //     (int)(inner_radius*2), (int)(inner_radius*2)
+        // );
 
         for (CogTeeth t : list) {
             graphics.drawPolyline(t.x, t.y, 4);
         }
 
-        theta += 0.0005;
+        theta += 0.0015;
         
     }
 }

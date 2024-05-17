@@ -20,30 +20,34 @@ public class App {
             // Hexagon hex = new Hexagon();
             // StarPolygon sp = new StarPolygon(600, 600);
             // Cog cog = new Cog(600, 600);
-            // CogMKII cog = new CogMKII(600, 600);
-            Heart heart = new Heart();
+            CogMKII cog = new CogMKII(600, 600);
+            // Heart heart = new Heart();
             // Coisa cog = new Coisa(600, 600);
             // frame.add(hex, BorderLayout.CENTER);
             // frame.add(star, BorderLayout.CENTER);
             // frame.add(sp, BorderLayout.CENTER);
-            frame.add(heart, BorderLayout.CENTER);
-            // frame.add(cog, BorderLayout.CENTER);
+            // frame.add(heart, BorderLayout.CENTER);
+            frame.add(cog, BorderLayout.CENTER);
 
             frame.setVisible(true);
 
             ExecutorService service = Executors.newSingleThreadExecutor();
 
             service.execute(() -> {
+                long last_update = System.nanoTime();
                 try {
                     while (true) {
-                        Thread.sleep(1);
+                        Thread.sleep(800 / 1000);
+                        long current = System.nanoTime();
                         // hex.repaint();
                         // star.repaint();
                         // sp.updateCenter(frame.getWidth(), frame.getHeight());
                         // sp.repaint();
-                        // cog.updateCenter(frame.getWidth(), frame.getHeight());
-                        // cog.repaint();
-                        heart.repaint();
+                        
+                        cog.updateCenter(frame.getWidth(), frame.getHeight(), (current - last_update) / 1_000_000_000f);
+                        cog.repaint();
+                        // heart.repaint();
+                        last_update = current;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

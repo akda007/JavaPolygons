@@ -6,19 +6,20 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
-import javafx.scene.paint.Color;
 
 public class CogMKII extends JComponent {
     Point middle;
     double theta = 0;
+    double deltaTime = 0;
 
     public CogMKII(int w, int h) {
         super();
         middle = new Point(w/2, h/2);
     }
 
-    public void updateCenter(int w, int h) {
+    public void updateCenter(int w, int h, double deltaTime) {
         middle = new Point(w/2, h/2);
+        this.deltaTime = deltaTime;
     }
 
     @Override
@@ -30,23 +31,23 @@ public class CogMKII extends JComponent {
         double outer_radius = 100;
         double inner_radius = outer_radius/2.5;
 
-        int teeth_count = 8;
-        double teeth_len = 30;
-        double teet_width = 30;
+        int teeth_count = 20;
+        double teeth_len = 20;
+        double teet_width = 10;
 
         double dTheta = (2 * Math.PI / teeth_count);
-        double angle_center = theta;
+        double angle_center = theta + deltaTime * 100;
 
         ArrayList<CogTeeth> list = new ArrayList<>();
 
         for (int i = 0; i< teeth_count; i++) {
-            double a1 = angle_center - (teet_width / 2 * Math.PI / 180);
-            double a2 = angle_center + (teet_width / 2 * Math.PI / 180);
+            double a1 = angle_center - (teet_width / 2 * Math.PI / 180)-1;
+            double a2 = angle_center + (teet_width / 2 * Math.PI / 180)-1;
 
-            double vx1 = outer_radius * Math.cos(a1);      
-            double vy1 = outer_radius * Math.sin(a1);
-            double vx2 = outer_radius * Math.cos(a2);      
-            double vy2 = outer_radius * Math.sin(a2);
+            double vx1 = (outer_radius-1) * Math.cos(a1);      
+            double vy1 = (outer_radius-1) * Math.sin(a1);
+            double vx2 = (outer_radius-1) * Math.cos(a2);      
+            double vy2 = (outer_radius-1) * Math.sin(a2);
 
             double x1a = angle_center - a1;
             double x2a = a2 - angle_center;
@@ -97,7 +98,7 @@ public class CogMKII extends JComponent {
             // graphics.drawLine((int)middle.getX(), (int)middle.getY(), t.x[3], t.y[3]);
         }
 
-        theta += 0.0005;
+        theta -= 0.415;
         
     }
 }
