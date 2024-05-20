@@ -20,14 +20,16 @@ public class App {
             // Hexagon hex = new Hexagon();
             // StarPolygon sp = new StarPolygon(600, 600);
             // Cog cog = new Cog(600, 600);
-            CogMKII cog = new CogMKII(600, 600);
+            // CogMKII cog = new CogMKII(600, 600);
             // Heart heart = new Heart();
+            Cube cube = new Cube();
             // Coisa cog = new Coisa(600, 600);
             // frame.add(hex, BorderLayout.CENTER);
             // frame.add(star, BorderLayout.CENTER);
             // frame.add(sp, BorderLayout.CENTER);
             // frame.add(heart, BorderLayout.CENTER);
-            frame.add(cog, BorderLayout.CENTER);
+            // frame.add(cog, BorderLayout.CENTER);
+            frame.add(cube, BorderLayout.CENTER);
 
             frame.setVisible(true);
 
@@ -44,9 +46,11 @@ public class App {
                         // sp.updateCenter(frame.getWidth(), frame.getHeight());
                         // sp.repaint();
                         
-                        cog.updateCenter(frame.getWidth(), frame.getHeight(), (current - last_update) / 1_000_000_000f);
-                        cog.repaint();
+                        // cog.updateCenter(frame.getWidth(), frame.getHeight(), (current - last_update) / 1_000_000_000f);
+                        // cog.repaint();
                         // heart.repaint();
+                        cube.draw();
+                        
                         last_update = current;
                     }
                 } catch (Exception e) {

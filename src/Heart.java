@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 
 import javax.swing.JComponent;
 
@@ -13,12 +14,14 @@ public class Heart extends JComponent {
 
         Graphics2D graphics = (Graphics2D)g;
 
-        Point center = new Point(getWidth()/2, getHeight()/2);
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        DoublePoint center = new DoublePoint(getWidth()/2, getHeight()/2);
 
 
         double diameter = 200;
         double height =  150;
-        double radius = diameter/4
+        double radius = diameter/4;
         double top_h = 30;
 
         DoublePoint p1 = new DoublePoint(center.getX() - diameter/2, center.getY());
@@ -36,6 +39,7 @@ public class Heart extends JComponent {
         g.drawLine(p2.getXInt(), p2.getYInt(), bottom.getXInt(), bottom.getYInt());
 
 
-        g.drawArc(p1.getXInt(), p1.getYInt() - (int)radius, (int)radius, (int)radius, 180, 360);
+        g.drawArc(p1.getXInt(), p1.getYInt() - (int)radius, (int)radius*2, (int)radius*2, 180, -180);
+        g.drawArc(center.getXInt(), center.getYInt() - (int)radius, (int)radius*2, (int)radius*2, 180, -180);
     }
 }
